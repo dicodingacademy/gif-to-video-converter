@@ -1,8 +1,9 @@
 import React from 'react';
+import InputFile from './components/InputFile';
 
 function App() {
   return (
-    <p>Hello, World</p>
+    <InputFile />
   );
 }
 
