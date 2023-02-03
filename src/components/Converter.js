@@ -7,10 +7,9 @@ import AnchorDownloadStyled from './styled/AchorDownloadStyled';
 
 function Converter() {
   const [mp4Url, setMp4Url] = useState('');
-  const [mp4Process, setMp4Process] = useState(false);
   const [mp4Filename, setMP4Filename] = useState('');
   const [webmUrl, setWebmUrl] = useState('');
-  const [webmProcess, setWebmProcess] = useState(false);
+  const [process, setProcess] = useState(false);
   const [webmFilename, setWebmFilename] = useState('');
   const [gif, setGif] = useState(null);
 
@@ -29,11 +28,11 @@ function Converter() {
       return;
     }
 
-    setMp4Process(true);
+    setProcess(true);
     const mp4Buffer = await convertGifToMp4(gif);
     const blob = new Blob([mp4Buffer], { type: 'video/mp4' });
     const url = URL.createObjectURL(blob);
-    setMp4Process(false);
+    setProcess(false);
     setMp4Url(url);
   };
 
@@ -42,13 +41,24 @@ function Converter() {
       return;
     }
 
-    setWebmProcess(true);
+    setProcess(true);
     const webmBuffer = await convertGifToWebm(gif);
     const blob = new Blob([webmBuffer], { type: 'video/webm' });
     const url = URL.createObjectURL(blob);
-    setWebmProcess(false);
+    setProcess(false);
     setWebmUrl(url);
   };
+
+  if (process) {
+    return (
+      <div>
+        <InputFile inputFileChange={onInputFileChange} />
+        <Flex>
+          <ButtonConvertStyled disabled>Processing ...</ButtonConvertStyled>
+        </Flex>
+      </div>
+    );
+  }
 
   return (
     <div>
@@ -67,9 +77,9 @@ function Converter() {
             <ButtonConvertStyled
               onClick={onConvertGifToMp4}
               type="button"
-              disabled={!gif || mp4Process}
+              disabled={!gif}
             >
-              {mp4Process ? 'Processing ...' : 'Convert to MP4'}
+              Convert to MP4
             </ButtonConvertStyled>
           )}
         {webmUrl ? (
@@ -77,16 +87,16 @@ function Converter() {
             href={webmUrl}
             download={webmFilename}
           >
-            Download Webm
+            Download WEBM
           </AnchorDownloadStyled>
         )
           : (
             <ButtonConvertStyled
               onClick={onConvertGifToWebm}
               type="button"
-              disabled={!gif || webmProcess}
+              disabled={!gif}
             >
-              {webmProcess ? 'Processing ...' : 'Convert to Webm'}
+              Convert to WEBM
             </ButtonConvertStyled>
           )}
       </Flex>
