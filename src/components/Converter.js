@@ -9,8 +9,8 @@ function Converter() {
   const [mp4Url, setMp4Url] = useState('');
   const [mp4Filename, setMP4Filename] = useState('');
   const [webmUrl, setWebmUrl] = useState('');
-  const [process, setProcess] = useState(false);
   const [webmFilename, setWebmFilename] = useState('');
+  const [process, setProcess] = useState(false);
   const [gif, setGif] = useState(null);
 
   const onInputFileChange = (file) => {
