@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import InputFile from './InputFile';
 import { convertGifToMp4, convertGifToWebm } from '../utils/FFmpeg';
+import ButtonConvertStyled from './styled/ButtonConvertStyled';
+import Flex from './styled/Flex';
+import AnchorDownloadStyled from './styled/AchorDownloadStyled';
 
 function Converter() {
   const [mp4Url, setMp4Url] = useState('');
@@ -35,13 +38,12 @@ function Converter() {
   return (
     <div>
       <InputFile inputFileChange={onInputFileChange} />
-
-      <button onClick={onConvertGifToMp4} type="button">Convert to MP4</button>
-      <button onClick={onConvertGifToWebm} type="button">Convert to Webm</button>
+      <Flex flexDirection="row" gap="10px">
+        {mp4Url ? <AnchorDownloadStyled href={mp4Url}>Download MP4</AnchorDownloadStyled> : <ButtonConvertStyled onClick={onConvertGifToMp4} type="button">Convert to MP4</ButtonConvertStyled>}
+        {webmUrl ? <AnchorDownloadStyled href={webmUrl}>Download Webm</AnchorDownloadStyled> : <ButtonConvertStyled onClick={onConvertGifToWebm} type="button">Convert to Webm</ButtonConvertStyled>}
+      </Flex>
 
       {loading && <p>On process! Do not close window</p>}
-      {mp4Url && <p><a href={mp4Url} download>Download MP4</a></p>}
-      {webmUrl && <p><a href={webmUrl} download>Download Webm</a></p> }
     </div>
   );
 }
