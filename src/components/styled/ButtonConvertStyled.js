@@ -12,6 +12,11 @@ const ButtonConvertStyled = styled.button`
   cursor: pointer;
   color: ${colors.color};
   font-size: 18px;
+  
+  &:disabled {
+    color: gray;
+    border-color: gray;
+  }
 `;
 
 export default ButtonConvertStyled;

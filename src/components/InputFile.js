@@ -14,7 +14,7 @@ function InputFile({ inputFileChange }) {
   return (
     <FileInputContainer>
       <FileInputLabelStyled htmlFor="inputFile">
-        Drop or select GIF to convert
+        Drop or select GIF
       </FileInputLabelStyled>
       <FileInputStyled id="inputFile" type="file" accept="image/gif" ref={inputFile} onChange={onInputFileChange} />
 
