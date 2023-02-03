@@ -15,6 +15,8 @@ function Converter() {
   const onInputFileChange = (file) => {
     if (file) {
       setGif(file);
+      setMp4Url('');
+      setWebmUrl('');
     }
   };
 
