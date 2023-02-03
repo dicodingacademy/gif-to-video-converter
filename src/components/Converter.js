@@ -8,10 +8,19 @@ import AnchorDownloadStyled from './styled/AchorDownloadStyled';
 function Converter() {
   const [mp4Url, setMp4Url] = useState('');
   const [mp4Filename, setMP4Filename] = useState('');
+  const [mp4FileSize, setMp4FileSize] = useState(0);
   const [webmUrl, setWebmUrl] = useState('');
   const [webmFilename, setWebmFilename] = useState('');
+  const [webmFileSize, setWebmFileSize] = useState(0);
   const [process, setProcess] = useState(false);
   const [gif, setGif] = useState(null);
+
+  const convertBytes = (num) => {
+    const suffixes = ['bytes', 'KB', 'MB', 'GB'];
+    let index = Math.floor(Math.log(num) / Math.log(1024));
+    index = Math.max(0, Math.min(index, suffixes.length - 1));
+    return `${(num / 1024 ** index).toFixed(1)} ${suffixes[index]}`;
+  };
 
   const onInputFileChange = (file) => {
     if (file) {
@@ -34,6 +43,7 @@ function Converter() {
     const url = URL.createObjectURL(blob);
     setProcess(false);
     setMp4Url(url);
+    setMp4FileSize(blob.size);
   };
 
   const onConvertGifToWebm = async () => {
@@ -47,6 +57,7 @@ function Converter() {
     const url = URL.createObjectURL(blob);
     setProcess(false);
     setWebmUrl(url);
+    setWebmFileSize(blob.size);
   };
 
   if (process) {
@@ -71,6 +82,10 @@ function Converter() {
               download={mp4Filename}
             >
               Download MP4
+              <br />
+              (
+              {convertBytes(mp4FileSize)}
+              )
             </AnchorDownloadStyled>
           )
           : (
@@ -88,6 +103,10 @@ function Converter() {
             download={webmFilename}
           >
             Download WEBM
+            <br />
+            (
+            {convertBytes(webmFileSize)}
+            )
           </AnchorDownloadStyled>
         )
           : (
