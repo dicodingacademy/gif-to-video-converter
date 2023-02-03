@@ -16,6 +16,7 @@ const ButtonConvertStyled = styled.button`
   &:disabled {
     color: gray;
     border-color: gray;
+    cursor: not-allowed;
   }
 `;
 
