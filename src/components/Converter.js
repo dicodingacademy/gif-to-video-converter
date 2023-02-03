@@ -52,7 +52,7 @@ function Converter() {
   if (process) {
     return (
       <div>
-        <InputFile inputFileChange={onInputFileChange} />
+        <InputFile disabled inputFileChange={onInputFileChange} />
         <Flex>
           <ButtonConvertStyled disabled>Processing ...</ButtonConvertStyled>
         </Flex>

@@ -4,7 +4,7 @@ import FileInputStyled from './styled/FileInputStyled';
 import FileInputContainer from './styled/FileInputContainer';
 import FileInputLabelStyled from './styled/FileInputLabelStyled';
 
-function InputFile({ inputFileChange }) {
+function InputFile({ inputFileChange, disabled }) {
   const inputFile = useRef(null);
 
   const onInputFileChange = () => {
@@ -16,7 +16,7 @@ function InputFile({ inputFileChange }) {
       <FileInputLabelStyled htmlFor="inputFile">
         Drop or select GIF
       </FileInputLabelStyled>
-      <FileInputStyled id="inputFile" type="file" accept="image/gif" ref={inputFile} onChange={onInputFileChange} />
+      <FileInputStyled disabled={disabled} id="inputFile" type="file" accept="image/gif" ref={inputFile} onChange={onInputFileChange} />
 
     </FileInputContainer>
   );
@@ -24,6 +24,11 @@ function InputFile({ inputFileChange }) {
 
 InputFile.propTypes = {
   inputFileChange: PropTypes.func.isRequired,
+  disabled: PropTypes.bool,
+};
+
+InputFile.defaultProps = {
+  disabled: false,
 };
 
 export default InputFile;
