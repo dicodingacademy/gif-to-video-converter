@@ -4,6 +4,7 @@ import { convertGifToMp4, convertGifToWebm } from '../utils/FFmpeg';
 import ButtonConvertStyled from './styled/ButtonConvertStyled';
 import Flex from './styled/Flex';
 import AnchorDownloadStyled from './styled/AchorDownloadStyled';
+import OptionsSize from './OptionsSize';
 
 function Converter() {
   const [mp4Url, setMp4Url] = useState('');
@@ -14,6 +15,7 @@ function Converter() {
   const [webmFileSize, setWebmFileSize] = useState(0);
   const [process, setProcess] = useState(false);
   const [gif, setGif] = useState(null);
+  const [size, setSize] = useState('720');
 
   const convertBytes = (num) => {
     const suffixes = ['bytes', 'KB', 'MB', 'GB'];
@@ -30,6 +32,10 @@ function Converter() {
       setMp4Url('');
       setWebmUrl('');
     }
+  };
+
+  const onSizeChange = (value) => {
+    setSize(value);
   };
 
   const onConvertGifToMp4 = async () => {
@@ -64,6 +70,7 @@ function Converter() {
     return (
       <div>
         <InputFile disabled inputFileChange={onInputFileChange} />
+        <OptionsSize sizeChange={onSizeChange} size={size} />
         <Flex>
           <ButtonConvertStyled disabled>Processing ...</ButtonConvertStyled>
         </Flex>
@@ -74,6 +81,7 @@ function Converter() {
   return (
     <div>
       <InputFile inputFileChange={onInputFileChange} />
+      <OptionsSize sizeChange={onSizeChange} size={size} />
       <Flex flexDirection="row" gap="10px">
         {mp4Url
           ? (
