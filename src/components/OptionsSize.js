@@ -13,11 +13,11 @@ function OptionsSize({ sizeChange, size }) {
   return (
     <OptionsSizeContainerStyled>
       <OptionsSizeLabelStyled>Maximal Size</OptionsSizeLabelStyled>
-      <SelectStyled onChange={handleChange}>
-        <OptionStyled value="480" selected={size === '480'}>480p</OptionStyled>
-        <OptionStyled value="720" selected={size === '720'}>720p</OptionStyled>
-        <OptionStyled value="1080" selected={size === '1080'}>1080p</OptionStyled>
-        <OptionStyled value="original" selected={size === 'original'}>Original</OptionStyled>
+      <SelectStyled onChange={handleChange} defaultValue={size}>
+        <OptionStyled value="480">480p</OptionStyled>
+        <OptionStyled value="720">720p</OptionStyled>
+        <OptionStyled value="1080">1080p</OptionStyled>
+        <OptionStyled value="original">Original</OptionStyled>
       </SelectStyled>
     </OptionsSizeContainerStyled>
   );

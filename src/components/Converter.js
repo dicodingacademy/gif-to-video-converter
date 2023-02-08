@@ -36,6 +36,8 @@ function Converter() {
 
   const onSizeChange = (value) => {
     setSize(value);
+    setMp4Url('');
+    setWebmUrl('');
   };
 
   const onConvertGifToMp4 = async () => {
@@ -44,7 +46,7 @@ function Converter() {
     }
 
     setProcess(true);
-    const mp4Buffer = await convertGifToMp4(gif);
+    const mp4Buffer = await convertGifToMp4(gif, { maxSize: size });
     const blob = new Blob([mp4Buffer], { type: 'video/mp4' });
     const url = URL.createObjectURL(blob);
     setProcess(false);
@@ -58,7 +60,7 @@ function Converter() {
     }
 
     setProcess(true);
-    const webmBuffer = await convertGifToWebm(gif);
+    const webmBuffer = await convertGifToWebm(gif, { maxSize: size });
     const blob = new Blob([webmBuffer], { type: 'video/webm' });
     const url = URL.createObjectURL(blob);
     setProcess(false);
